@@ -3,7 +3,7 @@
 <form class="form mt-4" [formGroup]="loginForm" (submit)="login()">
 
     <div class="form-group">
-        <input
+        <input #userNameInput
             formControlName="userName" 
             class="form-control" 
             placeholder="user name" 

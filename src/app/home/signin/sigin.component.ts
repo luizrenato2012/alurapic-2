@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/core/auth.service';
+import { AuthService } from 'src/app/core/auth/auth.service';
 import { Router } from '@angular/router';
+import { PlatformDetectorService } from 'src/app/core/palataform/platform-detector.service';
 
 @Component({
     templateUrl : './signin.component.html'
@@ -10,9 +11,13 @@ export class SigninComponent implements OnInit{
 
     loginForm : FormGroup;
 
+    @ViewChild("userNameInput")
+    userNameInput : ElementRef<HTMLInputElement>;
+
     constructor(private builder : FormBuilder,
                 private authService : AuthService,
-                private router : Router){
+                private router : Router,
+                private platformDetectorService : PlatformDetectorService){
     }
 
     ngOnInit(): void {
@@ -33,6 +38,10 @@ export class SigninComponent implements OnInit{
             error => {
                 console.log(error);
                 alert('Erro ao logar \n' + JSON.stringify(error));
+                // atalho pra q a 2a instrução só seja executa com o 1a true sem usar if
+                if (this.platformDetectorService.isPlatformBrower()) {
+                  this.userNameInput.nativeElement.focus();
+                }
             });
     }
 }
