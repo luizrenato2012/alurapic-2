@@ -11,6 +11,7 @@ import { User } from './user';
 export class UserService {
 
     private subject = new BehaviorSubject<User>(null);
+    private userName : string="";
 
     constructor(private tokenService : TokenService){
         this.tokenService.hasToken() && this.decodeAndNotify();
@@ -24,6 +25,7 @@ export class UserService {
     private decodeAndNotify() {
         let token = this.tokenService.getToken();
         let user = jwt_decode(token) as User;
+        this.userName = user.name;
         this.subject.next(user);
     }
 
@@ -35,4 +37,13 @@ export class UserService {
         this.tokenService.removeToken();
         this.subject.next(null);
     }
+
+    isLoged() {
+        return this.tokenService.hasToken();
+    }
+
+    getUserName() {
+        return this.userName;
+    }
+
 }
