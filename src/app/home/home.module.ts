@@ -6,11 +6,13 @@ import { CommonModule } from '@angular/common';
 import { VMessageModule } from '../shared/components/vmessage/vmessage.module';
 import { RouterModule } from '@angular/router';
 import { SignupComponent } from './signup/signup.component';
+import { HomeComponent } from './home.component';
 
 @NgModule({
     declarations: [
         SigninComponent,
-        SignupComponent
+        SignupComponent, 
+        HomeComponent
     ],
     imports : [
         CommonModule,

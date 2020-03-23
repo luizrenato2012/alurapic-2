@@ -3,6 +3,7 @@
 <form class="form mt-4" [formGroup]="signupForm" (submit)="signUp()">
     <div class="form-group">
         <input
+            #inputEmail
             formControlName="email"  
             placeholder="email" 
             class="form-control" 
@@ -78,5 +79,5 @@
 
     <button [disabled]="signupForm.invalid || signupForm.pending" class="btn btn-primary btn-block">Register</button>
 
-    <p>Already a user?<a [routerLink]="['']">Sign In!</a></p>
+    <p>Already a user?<a [routerLink]="['']"> Sign In!</a></p>
 </form>
